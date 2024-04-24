@@ -1,9 +1,9 @@
 ---
-title: <OrganizationProfile />
+title: <OrganizationProfile /> component
 description: The `<OrganizationProfile />` component is used to render a beautiful, full-featured organization management UI that allows users to manage their organization profile and security settings.
 ---
 
-# `<OrganizationProfile />`
+# `<OrganizationProfile />` component
 
 <Images
   alt="Organization Profile Example"
@@ -14,7 +14,18 @@ description: The `<OrganizationProfile />` component is used to render a beautif
 
 The `<OrganizationProfile />` component is used to render a beautiful, full-featured organization management UI that allows users to manage their organization profile and security settings.
 
-## Usage
+## Properties
+
+All props are optional.
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `appearance` | <code>[Appearance](/docs/components/customization/overview) \| undefined</code> | Optional object to style your components. Will only affect [Clerk Components](/docs/components/overview) and not [Account Portal](/docs/account-portal/overview) pages. |
+| `afterLeaveOrganizationUrl` | `string` | Full URL or path to navigate to after leaving an organization. |
+| `routing` | `'hash' \| 'path' \| 'virtual'` | The routing strategy for your pages. <br />Defaults to `'path'` in Next.js and Remix applications. Defaults to `hash` for all other SDK's. |
+| `path` | `string` | The path where the component is mounted on when `routing` is set to `path`. It is ignored in hash- and virtual-based routing.<br />For example: `/organization-profile`. |
+
+## Usage with frameworks
 
 <Tabs type="framework" items={["Next.js", "React", "Remix"]}>
   <Tab>
@@ -26,7 +37,7 @@ The `<OrganizationProfile />` component is used to render a beautiful, full-feat
 
       export default function OrganizationProfilePage() {
         return (
-          <OrganizationProfile routing='path' path="/organization-profile" />
+          <OrganizationProfile path="/organization-profile" />
         )
       }
       ```
@@ -36,7 +47,7 @@ The `<OrganizationProfile />` component is used to render a beautiful, full-feat
 
       export default function OrganizationProfilePage() {
         return (
-          <OrganizationProfile />
+          <OrganizationProfile path="/organization-profile" />
         )
       }
       ```
@@ -48,7 +59,7 @@ The `<OrganizationProfile />` component is used to render a beautiful, full-feat
     import { OrganizationProfile } from "@clerk/clerk-react";
 
     export default function OrganizationProfilePage() {
-      return <OrganizationProfile />;
+      return <OrganizationProfile path="/organization-profile" />;
     }
     ```
   </Tab>
@@ -58,29 +69,288 @@ The `<OrganizationProfile />` component is used to render a beautiful, full-feat
     import { OrganizationProfile } from "@clerk/remix";
 
     export default function OrganizationProfilePage() {
-      return <OrganizationProfile />;
+      return <OrganizationProfile path="/organization-profile" />;
     }
     ```
   </Tab>
 </Tabs>
 
-## Properties
+## Usage with JavaScript
 
-All props below are optional.
+The following methods available on an instance of the [`Clerk`](/docs/references/javascript/clerk/clerk) class are used to render and control the `<OrganizationProfile />` component:
+
+- [`mountOrganizationProfile()`](#mount-organization-profile)
+- [`unmountOrganizationProfile()`](#unmount-organization-profile)
+- [`openOrganizationProfile()`](#open-organization-profile)
+- [`closeOrganizationProfile()`](#close-organization-profile)
+
+The following examples assume that you have followed the [quickstart](/docs/quickstarts/javascript) in order to add Clerk to your JavaScript application.
+
+### `mountOrganizationProfile()`
+
+Render the `<OrganizationProfile />` component to an HTML `<div>` element.
+
+```typescript
+function mountOrganizationProfile(node: HTMLDivElement, props?: OrganizationProfileProps): void;
+```
+
+#### `mountOrganizationProfile()` params
 
 | Name | Type | Description |
 | --- | --- | --- |
-| `afterLeaveOrganizationUrl` | `string` | Full URL or path to navigate after leaving an organization. |
-| `routing` | `'hash' \| 'path' \| 'virtual'` | The routing strategy for your pages. |
-| `path` | `string` | The path where the component is mounted when path-based routing is used. -e.g. /create-org. This prop is ignored in hash and virtual based routing. |
-| `appearance` | <code>[Appearance](/docs/components/customization/overview) \| undefined</code> | Optional object to style your components. Will only affect [Clerk Components][components-ref] and not [Account Portal][ap-ref] pages. |
+| `node` | [`HTMLDivElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDivElement) | The `<div>` element used to render in the `<OrganizationProfile />` component |
+| `props?` | [`OrganizationProfileProps`](#properties) | The properties to pass to the `<OrganizationProfile />` component |
+
+#### `mountOrganizationProfile()` usage
+
+<InjectKeys>
+
+<CodeBlockTabs type="npm-script" options={['NPM module', '<script>']}>
+  ```js filename="main.js" {14}
+  import Clerk from '@clerk/clerk-js';
+
+  // Initialize Clerk with your Clerk publishable key
+  const clerk = new Clerk('{{pub_key}}');
+  await clerk.load();
+
+  document.getElementById("app").innerHTML = `
+    <div id="organization-profile"></div>
+  `;
+
+  const orgProfileDiv =
+    document.getElementById("organization-profile");
+
+  clerk.mountOrganizationProfile(orgProfileDiv);
+  ```
+
+  ```html filename="index.html" {21}
+  <!-- Add a <div id="organization-profile"> element to your HTML -->
+  <div id="organization-profile"></div>
+
+  <!-- Initialize Clerk with your
+  Clerk Publishable key and Frontend API URL -->
+  <script
+    async
+    crossorigin="anonymous"
+    data-clerk-publishable-key="{{pub_key}}"
+    src="https://{{fapi_url}}/npm/@clerk/clerk-js@latest/dist/clerk.browser.js"
+    type="text/javascript"
+  ></script>
+
+  <script>
+    window.addEventListener("load", async function () {
+      await Clerk.load();
+
+      const orgProfileDiv =
+        document.getElementById('organization-profile');
+
+      Clerk.mountOrganizationProfile(orgProfileDiv);
+    });
+  </script>
+  ```
+</CodeBlockTabs>
+
+</InjectKeys>
+
+### `unmountOrganizationProfile()`
+
+Unmount and run cleanup on an existing `<OrganizationProfile />` component instance.
+
+```typescript
+function unmountOrganizationProfile(node: HTMLDivElement): void;
+```
+
+#### `unmountOrganizationProfile()` params
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `node` | [`HTMLDivElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDivElement) | The container `<div>` element with a rendered `<OrganizationProfile />` component instance. |
+
+#### `unmountOrganizationProfile()` usage
+
+<InjectKeys>
+
+<CodeBlockTabs type="npm-script" options={['NPM module', '<script>']}>
+  ```js filename="main.js" {18}
+  import Clerk from '@clerk/clerk-js';
+
+  // Initialize Clerk with your Clerk publishable key
+  const clerk = new Clerk('{{pub_key}}');
+  await clerk.load();
+
+  document.getElementById('app').innerHTML = `
+    <div id="organization-profile"></div>
+  `
+
+  const orgProfileDiv =
+    document.getElementById('organization-profile');
+
+  clerk.mountOrganizationProfile(orgProfileDiv);
+
+  // ...
+
+  clerk.unmountOrganizationProfile(orgProfileDiv);
+  ```
+
+  ```html filename="index.html" {25}
+  <!-- Add a <div id="organization-profile"> element to your HTML -->
+  <div id="organization-profile"></div>
+
+  <!-- Initialize Clerk with your
+  Clerk Publishable key and Frontend API URL -->
+  <script
+    async
+    crossorigin="anonymous"
+    data-clerk-publishable-key="{{pub_key}}"
+    src="https://{{fapi_url}}/npm/@clerk/clerk-js@latest/dist/clerk.browser.js"
+    type="text/javascript"
+  ></script>
+
+  <script>
+    window.addEventListener("load", async function () {
+      await Clerk.load();
+
+      const orgProfileDiv =
+        document.getElementById('organization-profile');
+
+      Clerk.mountOrganizationProfile(orgProfileDiv);
+
+      // ...
+
+      Clerk.unmountOrganizationProfile(orgProfileDiv);
+    });
+  </script>
+  ```
+</CodeBlockTabs>
+
+</InjectKeys>
+
+### `openOrganizationProfile()`
+
+Opens the `<OrganizationProfile />` component as an overlay at the root of your HTML `body` element.
+
+```typescript
+function openOrganizationProfile(props?: OrganizationProfileProps): void;
+```
+
+#### `openOrganizationProfile()` params
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `props?` | [`OrganizationProfileProps`](#properties) | The properties to pass to the `<OrganizationProfile />` component |
+
+#### `openOrganizationProfile()` usage
+
+<InjectKeys>
+
+<CodeBlockTabs type="npm-script" options={['NPM module', '<script>']}>
+  ```js filename="main.js" {14}
+  import Clerk from '@clerk/clerk-js';
+
+  // Initialize Clerk with your Clerk publishable key
+  const clerk = new Clerk('{{pub_key}}');
+  await clerk.load();
+
+  document.getElementById('app').innerHTML = `
+    <div id="organization-profile"></div>
+  `
+
+  const orgProfileDiv =
+    document.getElementById('organization-profile');
+
+  clerk.openOrganizationProfile(orgProfileDiv);
+  ```
+
+  ```html filename="index.html" {21}
+  <!-- Add a <div id="organization-profile"> element to your HTML -->
+  <div id="organization-profile"></div>
+
+  <!-- Initialize Clerk with your
+  Clerk Publishable key and Frontend API URL -->
+  <script
+    async
+    crossorigin="anonymous"
+    data-clerk-publishable-key="{{pub_key}}"
+    src="https://{{fapi_url}}/npm/@clerk/clerk-js@latest/dist/clerk.browser.js"
+    type="text/javascript"
+  ></script>
+
+  <script>
+    window.addEventListener("load", async function () {
+      await Clerk.load();
+
+      const orgProfileDiv =
+        document.getElementById('organization-profile');
+
+      Clerk.openOrganizationProfile(orgProfileDiv);
+    });
+  </script>
+  ```
+</CodeBlockTabs>
+
+</InjectKeys>
+
+### `closeOrganizationProfile()`
+
+Closes the organization profile overlay.
+
+```typescript
+function closeOrganizationProfile(): void;
+```
+
+#### `closeOrganizationProfile()` usage
+
+<InjectKeys>
+
+<CodeBlockTabs type="npm-script" options={['NPM module', '<script>']}>
+  ```js filename="main.js" {14}
+  import Clerk from '@clerk/clerk-js';
+
+  // Initialize Clerk with your Clerk publishable key
+  const clerk = new Clerk('{{pub_key}}');
+  await clerk.load();
+
+  document.getElementById('app').innerHTML = `
+    <div id="organization-profile"></div>
+  `
+
+  const orgProfileDiv =
+    document.getElementById('organization-profile');
+
+  clerk.closeOrganizationProfile(orgProfileDiv);
+  ```
+
+  ```html filename="index.html" {21}
+  <!-- Add a <div id="organization-profile"> element to your HTML -->
+  <div id="organization-profile"></div>
+
+  <!-- Initialize Clerk with your
+  Clerk Publishable key and Frontend API URL -->
+  <script
+    async
+    crossorigin="anonymous"
+    data-clerk-publishable-key="{{pub_key}}"
+    src="https://{{fapi_url}}/npm/@clerk/clerk-js@latest/dist/clerk.browser.js"
+    type="text/javascript"
+  ></script>
+
+  <script>
+    window.addEventListener("load", async function () {
+      await Clerk.load();
+
+      const orgProfileDiv =
+        document.getElementById('organization-profile');
+
+      Clerk.closeOrganizationProfile(orgProfileDiv);
+    });
+  </script>
+  ```
+</CodeBlockTabs>
+
+</InjectKeys>
 
 ## Customization
 
 To learn about how to customize Clerk components, see the [customization documentation](/docs/components/customization/overview).
 
-In addition, you also can add custom pages and links. For more information, refer to the [Custom Pages documentation][custom-pages-ref].
-
-[components-ref]: /docs/components/overview
-[ap-ref]: /docs/account-portal/overview
-[custom-pages-ref]: /docs/components/customization/organization-profile
+In addition, you also can add custom pages and links to the `<OrganizationProfile />` (/docs/components/customization/organization-profile).
