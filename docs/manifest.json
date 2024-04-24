@@ -1,5 +1,5 @@
 [
-  [{ "title": "Home Test", "icon": "home" }, "/"],
+  [{ "title": "Home", "icon": "home" }, "/"],
   "# Learning",
   [
     {
@@ -14,7 +14,6 @@
       ["Next.js", "/quickstarts/nextjs"],
       ["Remix", "/quickstarts/remix"],
       ["Gatsby", "/quickstarts/gatsby"],
-      ["RedwoodJS", "/quickstarts/redwood"],
       "# Frontend",
       ["JavaScript", "/quickstarts/javascript"],
       ["React", "/quickstarts/react"],
@@ -31,6 +30,11 @@
     },
     [
       ["Overview", "/guides/overview"],
+      ["Add custom onboarding to your authentication flow", "/guides/add-onboarding-flow"],
+      ["Routing in Clerk", "/guides/routing"],
+      ["Custom redirects", "/guides/custom-redirects"],
+      ["Transferring ownership of your App", "/guides/transferring-your-app"],
+      ["Use image optimization to improve app performance", "/guides/image-optimization/imageurl-image-optimization"],
       ["Implement basic Role Based Access Control with metadata", "/guides/basic-rbac"],
       ["Hide Personal Accounts and force organizations", "/guides/force-organizations"],
       ["Migrating to Clerk from Auth.js", "/guides/authjs-migration"]
@@ -46,12 +50,10 @@
     [
       ["Overview", "/authentication/overview"],
       "# Configuration",
-      ["Sign-up options", "/authentication/configuration/sign-up-options"],
-      ["Sign-in options", "/authentication/configuration/sign-in-options"],
+      ["Sign-up and sign-in options", "/authentication/configuration/sign-up-sign-in-options"],
       ["Session options", "/authentication/configuration/session-options"],
-      ["Email & SMS options", "/authentication/configuration/email-options"],
+      ["Email & SMS templates", "/authentication/configuration/email-sms-templates"],
       ["Restrictions", "/authentication/configuration/restrictions"],
-      ["SAML at Clerk", "/authentication/saml-at-clerk"],
       "# Prebuilt Components",
       ["<SignIn />", "https://clerk.com/docs/components/authentication/sign-in"],
       ["<SignUp />", "https://clerk.com/docs/components/authentication/sign-up"],
@@ -91,7 +93,15 @@
           ["X/Twitter v2", "/authentication/social-connections/x-twitter"],
           ["Xero", "/authentication/social-connections/xero/"]
         ]
-      ]
+      ],
+      "# SAML",
+      ["Overview", "/authentication/saml/overview"],
+      ["Authentication flows", "/authentication/saml/authentication-flows"],
+      ["Account linking", "/authentication/saml/account-linking"],
+      ["Azure", "/authentication/saml/azure"],
+      ["Google", "/authentication/saml/google"],
+      ["Okta", "/authentication/saml/okta"],
+      ["Custom provider", "/authentication/saml/custom-provider"]
     ]
   ],
   [
@@ -108,7 +118,6 @@
       ["<UserButton />", "https://clerk.com/docs/components/user/user-button"],
       ["<UserProfile />", "https://clerk.com/docs/components/user/user-profile"],
       "# Guides",
-      ["Sync Clerk data to your backend with webhooks", "/users/sync-data"],
       ["Web3 authentication", "/users/web3"]
     ]
   ],
@@ -134,7 +143,7 @@
       ["Inviting users", "/organizations/inviting-users"],
       ["Managing roles", "/organizations/managing-roles"],
       ["Viewing memberships", "/organizations/viewing-memberships"],
-      ["Managing multiple organizations", "/organizations/multiple-orgs"],
+      ["Create a custom organization switcher", "/organizations/custom-organization-switcher"],
       ["Verified domains", "/organizations/verified-domains"]
     ]
   ],
@@ -150,7 +159,7 @@
       ["Same-Origin Requests", "/backend-requests/making/same-origin"],
       ["Cross-Origin Requests", "/backend-requests/making/cross-origin"],
       [
-        "Session token customization",
+        "Customize your session token",
         "/backend-requests/making/custom-session-token"
       ],
       ["JWT Templates", "/backend-requests/making/jwt-templates"],
@@ -160,6 +169,9 @@
       ["Gatsby", "/backend-requests/handling/gatsby"],
       ["Ruby / Rails", "/backend-requests/handling/ruby-rails"],
       ["Manual JWT Verification", "/backend-requests/handling/manual-jwt"],
+      "# Versioning",
+      ["Overview", "/backend-requests/versioning/overview"],
+      ["Available versions", "/backend-requests/versioning/available-versions"],
       "# Resources",
       ["Session tokens", "/backend-requests/resources/session-tokens"],
       ["Rate limits", "/backend-requests/resources/rate-limits"]
@@ -177,7 +189,6 @@
       ["Getting started", "/account-portal/getting-started"],
 
       "# Advanced Usage",
-      ["Custom redirects", "/account-portal/custom-redirects"],
       ["Direct links", "/account-portal/direct-links"],
       ["User & Organization Pages","/account-portal/user-profile-org-profile"],
       ["Disable Account Portal","/account-portal/disable-account-portal"]
@@ -279,20 +290,22 @@
       ["useSignUp() and useSignIn()", "/custom-flows/use-sign-up"],
       ["Email & Password", "/custom-flows/email-password"],
       ["Email / SMS OTP", "/custom-flows/email-sms-otp"],
-      ["Magic links", "/custom-flows/magic-links"],
+      ["Email links", "/custom-flows/email-links"],
       ["Multifactor", "/custom-flows/mfa"],
+      ["Passkeys", "/custom-flows/passkeys"],
       ["OAuth Connections", "/custom-flows/oauth-connections"],
       ["SAML Connections", "/custom-flows/saml-connections"],
       ["Forgot Password", "/custom-flows/forgot-password"],
       ["Sign out", "/custom-flows/sign-out"],
       ["User Impersonation", "/custom-flows/user-impersonation"],
       ["Invitations", "/custom-flows/invitations"],
-      ["Embedded Magic Links", "/custom-flows/embedded-magic-links"],
+      ["Embedded Email Links", "/custom-flows/embedded-email-links"],
       [
         "Multi-session applications",
         "/custom-flows/multi-session-applications"
       ],
-      ["Error handling", "/custom-flows/error-handling"]
+      ["Error handling", "/custom-flows/error-handling"],
+      ["Bot sign-up protection", "/custom-flows/bot-sign-up-protection"]
     ]
   ],
   "---",
@@ -300,7 +313,10 @@
     { "title": "Integrations", "icon": "puzzle", "root": "integrations" },
     [
       ["Overview", "/integrations/overview"],
-      ["Webhooks", "/integrations/webhooks"],
+      "# Webhooks",
+      ["Overview", "/integrations/webhooks/overview"],
+      ["Sync Clerk data to your backend with webhooks", "/integrations/webhooks/sync-data"],
+      ["Handling webhooks with Inngest", "/integrations/webhooks/inngest"],
       "# Databases",
       ["Convex", "/integrations/databases/convex"],
       ["Fauna", "/integrations/databases/fauna"],
@@ -310,9 +326,7 @@
       ["Nhost", "/integrations/databases/nhost"],
       ["Supabase", "/integrations/databases/supabase"],
       "# Analytics",
-      ["Google Analytics", "/integrations/analytics/google-analytics"],
-      "# Webhooks",
-      ["Inngest", "/integrations/webhooks/inngest"]
+      ["Google Analytics", "/integrations/analytics/google-analytics"]
     ]
   ],
   [
@@ -323,15 +337,19 @@
     },
     [
       ["Instances / Environments", "/deployments/environments"],
+      ["Clerk environment variables", "/deployments/clerk-environment-variables"],
       "# Deployment",
       ["Deploy to production", "/deployments/overview"],
       ["Deploy to Vercel", "/deployments/deploy-to-vercel"],
+      ["Set up a staging environment", "/deployments/set-up-staging"],
+      ["Set up a preview environment", "/deployments/set-up-preview-environment"],
       ["Changing domains", "/deployments/changing-domains"],
       "# Migrations",
       ["Migrate to Clerk", "/deployments/migrate-overview"],
       ["Migrate from Firebase", "/deployments/migrate-from-firebase"],
-      ["Exporting user data", "/deployments/exporting-users"]
-
+      ["Exporting user data", "/deployments/exporting-users"],
+      "# Cookie Information",
+      ["Clerk Cookie Information", "/deployments/clerk-cookies"]
     ]
   ],
   [
@@ -341,6 +359,7 @@
       ["Test Emails and Phones", "/testing/test-emails-and-phones"],
       "# Testing Frameworks",
       ["Cypress", "/testing/cypress"],
+      ["Playwright", "/testing/playwright"],
       ["Postman or Insomnia", "/testing/postman-or-insomnia"]
     ]
   ],
@@ -379,6 +398,7 @@
       ["Entitlements", "/errors/entitlements"],
       ["Features", "/errors/features"],
       ["Identifications", "/errors/identifications"],
+      ["Passkeys", "/errors/passkeys"],
       ["Sign-in", "/errors/sign-in"],
       ["Sign-up", "/errors/sign-up"],
       ["Sign-in-tokens", "/errors/sign-in-tokens"]
@@ -407,26 +427,37 @@
       "root": "upgrade-guides"
     },
     [
-      ["Long Term Support Policy", "/upgrade-guides/long-term-support"],
+      ["Overview", "/upgrade-guides/overview"],
+      ["Long term support policy", "/upgrade-guides/long-term-support"],
+      ["Clerk SDK versioning", "/upgrade-guides/sdk-versioning"],
+      "# Upgrading to Core 2",
+      ["Overview", "/upgrade-guides/core-2/overview"],
+      ["Component redesign", "/upgrade-guides/core-2/component-redesign"],
+      [
+        { "title": "SDK Guides" },
+        [
+          ["Next.js", "/upgrade-guides/core-2/nextjs"],
+          ["Remix", "/upgrade-guides/core-2/remix"],
+          ["Expo", "/upgrade-guides/core-2/expo"],
+          ["Fastify", "/upgrade-guides/core-2/fastify"],
+          ["React", "/upgrade-guides/core-2/react"],
+          ["Node", "/upgrade-guides/core-2/node"],
+          ["Backend", "/upgrade-guides/core-2/backend"],
+          ["Chrome Extension", "/upgrade-guides/core-2/chrome-extension"],
+          ["JavaScript", "/upgrade-guides/core-2/javascript"]
+        ]
+      ],
+      "# Upgrading to Core 1",
+      ["Overview", "/upgrade-guides/upgrading-from-v2-to-v3"],
+      "# Dashboard",
       ["API Key Changes", "/upgrade-guides/api-keys"],
       ["URL-based session syncing", "/upgrade-guides/url-based-session-syncing"],
-      ["Progressive Sign up", "/upgrade-guides/progressive-sign-up"],
-      "# Upgrade to V3",
-      ["Introduction", "/upgrade-guides/v3-introduction"],
-      ["Client-side changes", "/upgrade-guides/v3-client-side-changes"],
-      [
-        "Next.js server-side changes",
-        "/upgrade-guides/v3-nextjs-server-side-changes"
-      ],
-      [
-        "Express server-side changes",
-        "/upgrade-guides/v3-express-server-side-changes"
-      ]
+      ["Progressive Sign up", "/upgrade-guides/progressive-sign-up"]
     ]
   ],
   [
     {
-      "title": "Security",
+      "title": "Security & Privacy",
       "icon": "lock-closed",
       "root": "security"
     },
@@ -440,9 +471,11 @@
       ["CSRF protection", "/security/csrf-protection"],
       ["Fixation protection", "/security/fixation-protection"],
       ["Password protection and rules", "/security/password-protection"],
+      ["Clerk Telemetry", "/telemetry"],
       "# Protect accounts from attacks",
       ["Brute force attacks and locking user accounts","/security/user-lock-guide"],
-      ["Customize max login attempts and duration of of user lockout", "/security/customize-user-lockout"],
+      ["Protect sign ups from bots","/security/bot-protection"],
+      ["Customize max sign-in attempts and duration of of user lockout", "/security/customize-user-lockout"],
       ["Unlock accounts from the Clerk Dashboard", "/security/unlock-user-accounts"],
       ["Programmatically lock and unlock accounts", "/security/programmatically-lock-user-accounts"]
     ]
@@ -456,7 +489,6 @@
       ["Read session and user data", "/references/nextjs/read-session-data"],
       ["Add custom sign up and sign in pages", "/references/nextjs/custom-signup-signin-pages"],
       ["Integrate Clerk into your app with tRPC", "/references/nextjs/trpc"],
-      ["Use Clerk with Next.js 12 and older", "/references/nextjs/usage-with-older-versions"],
       "# App Router References",
       ["auth()", "/references/nextjs/auth"],
       ["currentUser()", "/references/nextjs/current-user"],
@@ -466,10 +498,14 @@
       ["getAuth()", "/references/nextjs/get-auth"],
       ["buildClerkProps()", "/references/nextjs/build-clerk-props"],
       "# Other References",
-      ["Authentication Object", "/references/nextjs/authentication-object"],
-      ["authMiddleware()", "/references/nextjs/auth-middleware"],
+      ["clerkMiddleware()", "/references/nextjs/clerk-middleware"],
+      ["Auth Object", "/references/nextjs/auth-object"],
       "# Deprecated",
-      ["withClerkMiddleware()", "/references/nextjs/with-clerk-middleware"]
+      ["authMiddleware()", "/references/nextjs/auth-middleware"],
+      ["Use Clerk with Next.js 12 and older", "/references/nextjs/usage-with-older-versions"],
+      "# Demo Repositories",
+      ["App Router Demo Repo", "https://github.com/clerk/clerk-nextjs-demo-app-router"],
+      ["Pages Router Demo Repo", "https://github.com/clerk/clerk-nextjs-demo-pages-router"]
     ]
   ],
   [
@@ -501,56 +537,40 @@
       [
         { "title": "Clerk" },
         [
-          ["Clerk", "/references/javascript/clerk/clerk"],
-          ["SignIn", "/references/javascript/clerk/sign-in"],
-          ["SignUp", "/references/javascript/clerk/sign-up"],
-          ["UserProfile", "/references/javascript/clerk/user-profile"],
-          ["UserButton", "/references/javascript/clerk/user-button"],
+          ["Clerk class", "/references/javascript/clerk/clerk"],
           [
-            "OrganizationProfile",
-            "/references/javascript/clerk/organization-profile"
-          ],
-          [
-            "OrganizationSwitcher",
-            "/references/javascript/clerk/organization-switcher"
-          ],
-          [
-            "CreateOrganization",
-            "/references/javascript/clerk/create-organization"
-          ],
-          [
-            "OrganizationMethods",
+            "Organization methods",
             "/references/javascript/clerk/organization-methods"
           ],
-          ["RedirectMethods", "/references/javascript/clerk/redirect-methods"],
+          ["Redirect methods", "/references/javascript/clerk/redirect-methods"],
           ["BuildURLs", "/references/javascript/clerk/build-urls"],
           [
-            "Handle Navigation",
+            "Handle navigation",
             "/references/javascript/clerk/handle-navigation"
           ],
-          ["Session Methods", "/references/javascript/clerk/session-methods"]
+          ["Session methods", "/references/javascript/clerk/session-methods"]
         ]
       ],
       [
         { "title": "User" },
         [
-          ["User", "/references/javascript/user/user"],
-          ["Time-based OTP", "/references/javascript/user/totp"],
+          ["User object", "/references/javascript/user/user"],
+          ["TOTP methods", "/references/javascript/user/totp"],
           [
-            "Password Management",
+            "Password management methods",
             "/references/javascript/user/password-management"
           ],
-          ["Create Metadata", "/references/javascript/user/create-metadata"]
+          ["Create metadata methods", "/references/javascript/user/create-metadata"]
         ]
       ],
       [
         { "title": "Organization" },
         [
-          ["Organization", "/references/javascript/organization/organization"],
-          ["Members", "/references/javascript/organization/members"],
-          ["Invitations", "/references/javascript/organization/invitations"],
-          ["Domains", "/references/javascript/organization/domains"],
-          ["Membership Requests", "/references/javascript/organization/membership-request"]
+          ["Organization objects", "/references/javascript/organization/organization"],
+          ["Membership methods", "/references/javascript/organization/members"],
+          ["Invitation methods", "/references/javascript/organization/invitations"],
+          ["Domain methods", "/references/javascript/organization/domains"],
+          ["Membership request methods", "/references/javascript/organization/membership-request"]
         ]
       ],
       [
@@ -641,17 +661,19 @@
         { "title": "Types" },
         [
           ["Overview", "/references/javascript/types/overview"],
+          ["PasskeyResource", "/references/javascript/types/passkey-resource"],
           ["PublicUserData", "/references/javascript/types/public-user-data"],
           ["SessionStatus", "/references/javascript/types/session-status"],
           ["RedirectOptions", "/references/javascript/types/redirect-options"],
+          ["SignInFirstFactor", "/references/javascript/types/sign-in-first-factor"],
+          ["SignInSecondFactor", "/references/javascript/types/sign-in-second-factor"],
           ["SignInRedirectOptions", "/references/javascript/types/sign-in-redirect-options"],
           ["SignUpRedirectOptions", "/references/javascript/types/sign-up-redirect-options"],
           ["SignInInitialValues", "/references/javascript/types/sign-in-initial-values"],
           ["SignUpInitialValues", "/references/javascript/types/sign-up-initial-values"],
-          ["MagicLinkError", "/references/javascript/types/magic-link-error"],
+          ["EmailLinkError", "/references/javascript/types/email-link-error"],
           ["DeletedObject", "/references/javascript/types/deleted-object"],
-          ["OAuthProvider", "/references/javascript/types/oauth-provider"],
-          ["OAuthStrategy", "/references/javascript/types/oauth-strategy"],
+          ["OAuth types", "/references/javascript/types/oauth"],
           ["ClerkPaginatedResponse", "/references/javascript/types/clerk-paginated-response"],
           ["CustomPage", "/references/javascript/types/custom-page"]
         ]
@@ -666,7 +688,7 @@
     },
     [
       ["Overview", "references/nodejs/overview"],
-      ["Available methods", "references/backend/overview"],
+      ["Available methods", "references/nodejs/available-methods"],
       ["Connect/Express Middleware", "/docs/backend-requests/handling/nodejs"],
       [
         "Networkless token verification",
@@ -681,8 +703,7 @@
       "root": "references/remix"
     },
     [
-      ["<ClerkApp />", "references/remix/clerk-app"],
-      ["ClerkErrorBoundary()", "references/remix/clerk-error-boundary"]
+      ["<ClerkApp />", "references/remix/clerk-app"]
     ]
   ],
   [
@@ -694,7 +715,7 @@
     [
       ["Overview", "references/go/overview"],
       ["Verifying sessions", "references/go/verifying-sessions"],
-      ["Backend examples", "references/go/other-examples"],
+      ["Use Clerk Go for Backend API Operations", "references/go/other-examples"],
       ["Go SDK repository", "https://github.com/clerk/clerk-sdk-go"]
     ]
   ],
@@ -720,85 +741,7 @@
     ]
   ],
   [
-    {
-      "title": "Redwood",
-      "icon": "redwood",
-      "root": "references/redwood",
-      "tag": "Community"
-    },
-    [
-      ["Redwood", "https://redwoodjs.com/docs/auth/clerk"]
-    ]
-  ],
-  [
-    {
-      "title": "Svelte",
-      "icon": "svelte",
-      "root": "references/svelte",
-      "tag": "Community"
-    },
-    [
-      ["Svelte", "https://github.com/markjaquith/clerk-sveltekit"]
-    ]
-  ],
-  [
-    {
-      "title": "Vue",
-      "icon": "vue",
-      "root": "references/vue",
-      "tag": "Community"
-    },
-    [
-      ["Vue", "https://vue-clerk.vercel.app/"]
-    ]
-  ],
-  [
-    {
-      "title": "Elysia",
-      "icon": "elysia",
-      "root": "references/elysia",
-      "tag": "Community"
-    },
-    [
-      ["Elysia", "https://github.com/wobsoriano/elysia-clerk"]
-    ]
-  ],
-  [
-    {
-      "title": "Rust",
-      "icon": "rust",
-      "root": "references/rust",
-      "tag": "Community"
-    },
-    [
-      ["Rust", "https://github.com/cincinnati-ventures/clerk-rs"]
-    ]
-  ],
-  [
-    {
-      "title": "Hono",
-      "icon": "hono",
-      "root": "references/hono",
-      "tag": "Community"
-    },
-    [
-      ["Hono", "https://github.com/honojs/middleware/tree/main/packages/clerk-auth"]
-    ]
-  ],
-  [
-    {
-      "title": "C#",
-      "icon": "csharp",
-      "root": "references/csharp",
-      "tag": "Community"
-    },
-    [
-      ["C#", "https://github.com/Hawxy/Clerk.Net"]
-    ]
-  ],
-  "# API References",
-  [
-    { "title": "Backend SDK", "icon": "", "root": "/references/backend" },
+    { "title": "Backend SDK", "icon": "clerk", "root": "/references/backend" },
     [
       ["Overview", "/references/backend/overview"],
       [
@@ -807,9 +750,18 @@
           ["getUserList()", "/references/backend/user/get-user-list"],
           ["getUser()", "/references/backend/user/get-user"],
           ["getCount()", "/references/backend/user/get-count"],
+          ["getOrganizationMembershipList()", "/references/backend/user/get-organization-membership-list"],
+          ["getUserOAuthAccessToken()", "/references/backend/user/get-user-oauth-access-token"],
           ["createUser()", "/references/backend/user/create-user"],
+          ["verifyPassword()", "/references/backend/user/verify-password"],
+          ["banUser()", "/references/backend/user/ban-user"],
+          ["unbanUser()", "/references/backend/user/unban-user"],
+          ["lockUser()", "/references/backend/user/lock-user"],
+          ["unlockUser()", "/references/backend/user/unlock-user"],
           ["updateUser()", "/references/backend/user/update-user"],
-          ["deleteUser()", "/references/backend/user/delete-user"]
+          ["updateUserMetadata()", "/references/backend/user/update-user-metadata"],
+          ["deleteUser()", "/references/backend/user/delete-user"],
+          ["disableUserMFA()", "/references/backend/user/disable-user-mfa"]
         ]
       ],
       [
@@ -828,8 +780,8 @@
             "/references/backend/organization/get-organization-membership-list"
           ],
           [
-            "getPendingOrganizationInvitationList()",
-            "/references/backend/organization/get-pending-organization-invitation-list"
+            "getOrganizationInvitationList()",
+            "/references/backend/organization/get-organization-invitation-list"
           ],
           [
             "createOrganization()",
@@ -927,6 +879,27 @@
         ]
       ],
       [
+        { "title": "Redirect Urls" },
+        [
+          [
+            "getRedirectUrl()",
+            "/references/backend/redirect-urls/get-redirect-url"
+          ],
+          [
+            "getRedirectUrlList()",
+            "/references/backend/redirect-urls/get-redirect-url-list"
+          ],
+          [
+            "createRedirectUrl()",
+            "/references/backend/redirect-urls/create-redirect-url"
+          ],
+          [
+            "deleteRedirectUrl()",
+            "/references/backend/redirect-urls/delete-redirect-url"
+          ]
+        ]
+      ],
+      [
         { "title": "Email addresses" },
         [
           [
@@ -946,9 +919,133 @@
             "/references/backend/email-addresses/delete-email-address"
           ]
         ]
+      ],
+      [
+        { "title": "Phone numbers" },
+        [
+          [
+            "getPhoneNumber()",
+            "/references/backend/phone-numbers/get-phone-number"
+          ],
+          [
+            "createPhoneNumber()",
+            "/references/backend/phone-numbers/create-phone-number"
+          ],
+          [
+            "updatePhoneNumber()",
+            "/references/backend/phone-numbers/update-phone-number"
+          ],
+          [
+            "deletePhoneNumber()",
+            "/references/backend/phone-numbers/delete-phone-number"
+          ]
+        ]
+      ],
+      [
+        { "title": "Types" },
+        [
+          [
+            "PaginatedResourceResponse",
+            "/references/backend/types/paginated-resource-response"
+          ],
+          [
+            "Backend User object",
+            "/references/backend/types/backend-user"
+          ]
+        ]
       ]
     ]
   ],
+  [
+    {
+      "title": "Redwood",
+      "icon": "redwood",
+      "root": "references/redwood",
+      "tag": "Community"
+    },
+    [
+      ["Overview", "/references/redwood/overview"],
+      ["Redwood", "https://redwoodjs.com/docs/auth/clerk"]
+    ]
+  ],
+  [
+    {
+      "title": "Svelte",
+      "icon": "svelte",
+      "root": "references/svelte",
+      "tag": "Community"
+    },
+    [
+      ["Svelte", "https://github.com/markjaquith/clerk-sveltekit"]
+    ]
+  ],
+  [
+    {
+      "title": "Vue",
+      "icon": "vue",
+      "root": "references/vue",
+      "tag": "Community"
+    },
+    [
+      ["Vue", "https://vue-clerk.vercel.app/"]
+    ]
+  ],
+  [
+    {
+      "title": "Elysia",
+      "icon": "elysia",
+      "root": "references/elysia",
+      "tag": "Community"
+    },
+    [
+      ["Elysia", "https://github.com/wobsoriano/elysia-clerk"]
+    ]
+  ],
+  [
+    {
+      "title": "Rust",
+      "icon": "rust",
+      "root": "references/rust",
+      "tag": "Community"
+    },
+    [
+      ["Rust", "https://github.com/cincinnati-ventures/clerk-rs"]
+    ]
+  ],
+  [
+    {
+      "title": "Hono",
+      "icon": "hono",
+      "root": "references/hono",
+      "tag": "Community"
+    },
+    [
+      ["Hono", "https://github.com/honojs/middleware/tree/main/packages/clerk-auth"]
+    ]
+  ],
+  [
+    {
+      "title": "C#",
+      "icon": "csharp",
+      "root": "references/csharp",
+      "tag": "Community"
+    },
+    [
+      ["C#", "https://github.com/Hawxy/Clerk.Net"]
+    ]
+  ],
+  [
+    {
+      "title": "Astro",
+      "icon": "astro",
+      "root": "references/astro",
+      "tag": "Community"
+    },
+    [
+      ["Astro", "https://github.com/panteliselef/astro-with-clerk-auth/blob/main/packages/astro-clerk-auth/README.md"]
+    ]
+  ],
+  "# API References",
   ["Backend API", "/reference/backend-api"],
   ["Frontend API", "/reference/frontend-api/"]
 ]
